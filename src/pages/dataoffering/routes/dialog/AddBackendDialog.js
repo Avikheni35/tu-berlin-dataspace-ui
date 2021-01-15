@@ -24,6 +24,7 @@ export default {
     mounted: function () {},
     methods: {
         show(backendConnections) {
+            this.$data.selected = [];
             this.$data.backendConnections = backendConnections;
             this.$data.dialog = true;
         },
