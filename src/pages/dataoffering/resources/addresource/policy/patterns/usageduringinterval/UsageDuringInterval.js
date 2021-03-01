@@ -34,7 +34,6 @@ export default {
             this.createContractJson();
         },
         createContractJson() {
-            console.log(">>> CHANGE");
             this.$data.contractJson = {
                 "@context": {
                     "ids": "https://w3id.org/idsa/core/",
