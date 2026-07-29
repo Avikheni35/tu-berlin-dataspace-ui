@@ -1,5 +1,7 @@
-<div>
-    <v-alert outlined color="accent">
+<div class="content">
+    <div class="text-h5 header-text">Whitelisted DAPS</div>
+    <div class="text-subtitle-1 font-weight-regular">Restrict data exchange to connectors with trusted DAPS tokens.</div>
+    <v-alert outlined color="primary" class="mt-4">
         <div>You can whitelist DAPS to restrict data exchange to IDS Connectors that receive their DATs from whitelisted
             DAPS + your own connected DAPS. If no DAPS is whitelisted, all DAPS (even self-hosted ones) are trusted. If
             a message with a DAT arrives while at least one DAPS is whitelisted which is from a non-whitelisted DAPS,
@@ -7,8 +9,12 @@
             one's own DAPS.
         </div>
     </v-alert>
-    <add-daps-dialog ref="addDapsDialog" @dapsSaved="dapsSaved">
-    </add-daps-dialog>
+    <v-row>
+        <v-col cols="12" md="2" sm="12" class="pb-0">
+            <add-daps-dialog ref="addDapsDialog" @dapsSaved="dapsSaved">
+            </add-daps-dialog>
+        </v-col>
+    </v-row>
     <v-row no-gutters>
         <v-col cols="12" md="3" sm="6">
             <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line hide-details>
@@ -16,7 +22,7 @@
         </v-col>
     </v-row>
     <v-row no-gutters>
-        <v-col cols="12" md="11" sm="12">
+        <v-col cols="12" md="12" sm="12">
             <v-data-table v-model="selected" :headers="headers" :items="daps" :items-per-page="5" :search="search"
                           item-key="id" no-data-text="No Daps available">
                 <template v-slot:item.actions="{ item }">
@@ -26,7 +32,7 @@
                                 mdi-pencil
                             </v-icon>
                         </template>
-                        <span>edit Daps</span>
+                        <span>Edit DAPS</span>
                     </v-tooltip>
                     <v-tooltip bottom>
                         <template v-slot:activator="{ on, attrs }">
@@ -34,7 +40,7 @@
                                 mdi-delete
                             </v-icon>
                         </template>
-                        <span>delete Daps</span>
+                        <span>Delete DAPS</span>
                     </v-tooltip>
                 </template>
             </v-data-table>

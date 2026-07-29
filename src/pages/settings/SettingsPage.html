@@ -1,7 +1,9 @@
-<div>
+<div class="content">
+    <div class="text-h5 header-text">Settings</div>
+    <div class="text-subtitle-1 font-weight-regular mb-4">Configure your Dataspace Connector.</div>
     <v-form v-model="valid" ref="form">
         <v-row class="settings-row" no-gutters>
-            <v-col cols="12" md="2">
+            <v-col cols="12" md="2" class="text-subtitle-2 font-weight-bold pt-4">
                 Connector
             </v-col>
             <v-col cols="12" md="9">
@@ -13,7 +15,7 @@
             </v-col>
         </v-row>
         <v-row no-gutters class="settings-row settings-connector-status">
-            <v-col cols="12" md="2">
+            <v-col cols="12" md="2" class="text-subtitle-2 font-weight-bold pt-1">
                 Default endpoint
             </v-col>
             <v-col cols="12" md="9">
@@ -21,23 +23,7 @@
             </v-col>
         </v-row>
         <v-row no-gutters class="settings-row settings-connector-status">
-            <v-col cols="12" md="2">
-                Inbound model version
-            </v-col>
-            <v-col cols="12" md="9">
-                {{ connectorInboundModelVersion }}
-            </v-col>
-        </v-row>
-        <v-row no-gutters class="settings-row settings-connector-status">
-            <v-col cols="12" md="2">
-                Outbound model version
-            </v-col>
-            <v-col cols="12" md="9">
-                {{ connectorOutboundModelVersion }}
-            </v-col>
-        </v-row>
-        <v-row no-gutters class="settings-row settings-connector-status">
-            <v-col cols="12" md="2">
+            <v-col cols="12" md="2" class="text-subtitle-2 font-weight-bold pt-1">
                 Connector version
             </v-col>
             <v-col cols="12" md="9">
@@ -46,7 +32,7 @@
             </v-col>
         </v-row>
         <v-row class="settings-row" no-gutters>
-            <v-col cols="12" md="2">
+            <v-col cols="12" md="2" class="text-subtitle-2 font-weight-bold pt-4">
                 Proxy
             </v-col>
             <v-col cols="12" md="9">
@@ -75,15 +61,7 @@
             </v-col>
         </v-row>
         <v-row class="settings-row" no-gutters>
-            <v-col cols="12" md="2">
-                LogLevel
-            </v-col>
-            <v-col cols="12" md="9">
-                {{ logLevel }}
-            </v-col>
-        </v-row>
-        <v-row class="settings-row" no-gutters>
-            <v-col cols="12" md="2">
+            <v-col cols="12" md="2" class="text-subtitle-2 font-weight-bold pt-4">
                 Connector Deploy Mode
             </v-col>
             <v-col cols="12" md="9">
@@ -93,7 +71,7 @@
             </v-col>
         </v-row>
         <v-row class="settings-row" no-gutters>
-            <v-col cols="12" md="2">
+            <v-col cols="12" md="2" class="text-subtitle-2 font-weight-bold pt-4">
                 TrustStore
             </v-col>
             <v-col cols="12" md="9">
@@ -106,7 +84,7 @@
             </v-col>
         </v-row>
         <v-row class="settings-row" no-gutters>
-            <v-col cols="12" md="2">
+            <v-col cols="12" md="2" class="text-subtitle-2 font-weight-bold pt-4">
                 KeyStore
             </v-col>
             <v-col cols="12" md="9">

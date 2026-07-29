@@ -1,6 +1,6 @@
 .div-under-construction {
-    border: 1px solid var(--v-accent-base);
-    color: var(--v-accent-base);
+    border: 1px solid var(--v-primary-base);
+    color: var(--v-primary-base);
     padding: 30px!important;
     display: flex;
     align-content: center;
