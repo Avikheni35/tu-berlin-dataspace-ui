@@ -7,6 +7,7 @@ import bodyParser from "body-parser";
 import path from "path";
 import ontologyLoader from "./ontologyLoader.js"
 import basicAuth from "express-basic-auth";
+import { TextDecoder } from "util";
 
 const vuePath = path.join(path.resolve(),'..', '..', 'dist');
 const app = express();
@@ -123,6 +124,42 @@ function del(url, data) {
     });
 }
 
+function getBinary(url) {
+    if (DEBUG === true) {
+        console.log(">>> GET (binary) " + url);
+    }
+    return axios.get(url, {
+        auth,
+        httpsAgent,
+        responseType: 'arraybuffer'
+    });
+}
+
+// The connector's artifact data occasionally comes back double-encoded: raw
+// bytes get read upstream as Latin-1 and re-serialized as UTF-8, so every
+// byte >= 0x80 turns into a 2-byte UTF-8 sequence. This reverses that exact
+// transform (decode UTF-8, re-encode Latin-1) only when it's safe to do so -
+// i.e. the payload is valid UTF-8 and every decoded code point fits in a
+// single Latin-1 byte. Genuine multi-byte UTF-8 text (real non-Latin-1
+// characters) fails that check and is passed through untouched. Content
+// that is genuine UTF-8 text using only Latin-1-range characters (e.g. "café")
+// is indistinguishable from this corruption and would be altered - the same
+// ambiguity the manual recover_file.py script has.
+function recoverIfDoubleEncoded(buffer) {
+    let text;
+    try {
+        text = new TextDecoder("utf-8", { fatal: true }).decode(buffer);
+    } catch (e) {
+        return buffer;
+    }
+    for (let i = 0; i < text.length; i++) {
+        if (text.charCodeAt(i) > 0xFF) {
+            return buffer;
+        }
+    }
+    return Buffer.from(text, 'latin1');
+}
+
 function escape(text, key) {
     let escapedText = "";
     if (Array.isArray(text)) {
@@ -178,6 +215,28 @@ app.get('/ontology', function (req, res) {
 
 app.get('/testdata', function (req, res) {
     res.send("TEST DATA FROM BACKEND");
+});
+
+// Fetches artifact data as raw bytes and streams it back with a download
+// content-type/disposition, so the browser never interprets binary payloads
+// as text (which caused re-encoding corruption when linking to the connector
+// directly).
+app.get('/download', function (req, res) {
+    let call = req.query.url;
+    if (typeof call !== "string" || !call.startsWith("/")) {
+        res.status(400).send("Invalid url");
+        return;
+    }
+    getBinary(connectorUrl + call).then(response => {
+        let data = recoverIfDoubleEncoded(Buffer.from(response.data));
+        res.set('Content-Type', response.headers['content-type'] || 'application/octet-stream');
+        res.set('Content-Disposition', response.headers['content-disposition'] || 'attachment');
+        res.send(data);
+    }).catch(origError => {
+        let error = filterError(origError);
+        console.log("Error on GET (download) " + call, stringifySafe(error.response || error));
+        res.status(502).send("Error fetching artifact data");
+    });
 });
 
 app.post('/testdata', function (req, res) {

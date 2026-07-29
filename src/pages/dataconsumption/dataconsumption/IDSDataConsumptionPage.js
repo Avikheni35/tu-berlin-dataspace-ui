@@ -258,7 +258,7 @@ export default {
                     this.$data.selectedResource["@id"], this.$data.selectedResource["ids:contractOffer"], this.$data.selectedIdsArtifact, download);
                 let agreementId = await dataUtils.getIdOfAgreement(this.$data.requestContractResponse._links.artifacts.href);
                 this.$data.agreementArtifact = (await dataUtils.getAgreementArtifacts(agreementId))[0];
-                this.$data.downloadLink = this.$data.agreementArtifact._links.data.href;
+                this.$data.downloadLink = dataUtils.getArtifactDownloadUrl(this.$data.agreementArtifact);
                 this.$vuetify.goTo(".data-consumption-page-bottom");
             } catch (error) {
                 errorUtils.showError(error, "Request Contract");

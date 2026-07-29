@@ -297,6 +297,15 @@ export default {
         return (await restUtils.callConnector("GET", "/api/agreements/" + agreementId + "/artifacts"))["_embedded"].artifacts;
     },
 
+    // Routes artifact data downloads through the backend proxy (instead of
+    // linking directly to the connector) so the payload is fetched and
+    // forwarded as raw bytes, avoiding text re-encoding corruption of
+    // binary data.
+    getArtifactDownloadUrl(artifact) {
+        let dataUrl = new URL(artifact._links.data.href);
+        return restUtils.getBackendUrl() + "/download?url=" + encodeURIComponent(dataUrl.pathname + dataUrl.search);
+    },
+
     async getEnums() {
         if (enums == null) {
             enums = await restUtils.callConnector("GET", "/api/utils/enums");

@@ -103,7 +103,7 @@ export default {
                         let artifact = await dataUtils.getArtifact(resource.artifactId);
                         this.$data.loadedFile = {
                             name: artifact.title,
-                            link: artifact._links.data.href
+                            link: dataUtils.getArtifactDownloadUrl(artifact)
                         }
                     } else {
                         this.$data.active_tab = 1;

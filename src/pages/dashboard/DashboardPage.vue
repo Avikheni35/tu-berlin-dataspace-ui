@@ -41,7 +41,7 @@
       <v-col
           cols="12"
           sm="12"
-          md="3"
+          md="6"
           class="d-flex"
       >
         <file-types-card></file-types-card>
@@ -49,7 +49,7 @@
       <v-col
           cols="12"
           sm="12"
-          md="3"
+          md="6"
           class="d-flex"
       >
         <own-url-card></own-url-card>

@@ -15,7 +15,7 @@
                             </v-btn>
                         </v-form>
                         <div v-if="resources.length > 0">
-                            <h3 class="data-consumption-page-title">Resources:</h3>
+                            <div class="text-subtitle-1 font-weight-bold primary--text data-consumption-page-title">Resources:</div>
                             <div>
                                 <v-data-table :headers="headers" :items="resources" :items-per-page="5"
                                     :sort-by.sync="sortBy" :sort-desc.sync="sortDesc"
@@ -43,7 +43,7 @@
                             </div>
                         </div>
                         <div v-if="selectedRepresentations.length > 0">
-                            <h3>Select Representation:</h3>
+                            <div class="text-subtitle-1 font-weight-bold primary--text data-consumption-page-title">Select Representation:</div>
                             <div v-for="representation in selectedRepresentations">
                                 <v-btn color="secondary" @click="selectRepresentation(representation)">
                                     {{ representation.display }}
@@ -52,7 +52,7 @@
                             </div>
                         </div>
                         <div v-if="selectedArtifacts.length > 0">
-                            <h3 class="data-consumption-page-title">Artifacts:</h3>
+                            <div class="text-subtitle-1 font-weight-bold primary--text data-consumption-page-title">Artifacts:</div>
                             <!--                    <div v-for="artifact in selectedArtifacts">
                         <v-btn color="secondary">
                             {{ artifact['@id'] }}
@@ -73,13 +73,13 @@
                             </v-data-table>
                         </div>
                         <div v-if="requestContractResponse['confirmed'] == true">
-                            <h3 class="data-consumption-page-title">Download:</h3>
+                            <div class="text-subtitle-1 font-weight-bold primary--text data-consumption-page-title">Download:</div>
                             <v-btn color="secondary" :href="downloadLink" target="_blank">
                                 {{ downloadLink }}
                             </v-btn>
                         </div>
                         <div v-if="requestContractResponse['confirmed'] == true">
-                            <h3 class="data-consumption-page-title">Dispatch via routes:</h3>
+                            <div class="text-subtitle-1 font-weight-bold primary--text data-consumption-page-title">Dispatch via routes:</div>
                             <v-select label="Routes" v-model="selectedRoutes" :items="routes" item-text="description"
                                 item-value="selfLink" multiple chips></v-select>
                             <v-btn color="secondary" @click.native="dispatchViaRoutes">
@@ -108,7 +108,7 @@
                             </v-btn>
                         </v-form>
                         <div v-if="searchResult.length > 0">
-                            <h3 class="data-consumption-page-title">Resources:</h3>
+                            <div class="text-subtitle-1 font-weight-bold primary--text data-consumption-page-title">Resources:</div>
                             <div>
                                 <v-data-table :headers="headersSearch" :items="searchResult" :items-per-page="5"
                                     :sort-by.sync="sortBy" :sort-desc.sync="sortDesc"

@@ -3,6 +3,10 @@ import Axios from "axios";
 let backendUrl = "http://localhost:8083";
 
 export default {
+    getBackendUrl() {
+        return backendUrl;
+    },
+
     get(url) {
         return Axios.get(backendUrl + "/" + url, {
             headers: { 'content-type': 'application/json' }
